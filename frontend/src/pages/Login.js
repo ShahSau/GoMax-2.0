@@ -9,7 +9,10 @@ import styled from "styled-components";
 import Footer from "../components/Footer";
 import { userLogin } from "../redux/actions/userActions";
 import { useNavigate } from "react-router-dom";
-
+import { GoogleLogin } from "react-google-login";
+import { BsGoogle } from "react-icons/bs";
+import { FaFacebookF } from "react-icons/fa";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 function Login() {
   const [value, setValue] = useState("");
   let navigate = useNavigate();
@@ -17,7 +20,7 @@ function Login() {
     height: 100vh;
     min-width: 100vw;
     overflow-x: hidden;
-    position:relative;
+    position: relative;
     color: #f5f5f5 !important;
     p {
       color: #f5f5f5 !important;
@@ -40,6 +43,38 @@ function Login() {
       navigate("/");
     }
   }, [value]);
+  //google login
+  const googleSuccess = async (res) => {
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+    try {
+      dispatch({ type: "AUTH", data: { result, token } });
+      console.log(token);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const googleFailure = (error) => {
+    console.log(error);
+    console.error("Google singin was not successfull. Try again!");
+  };
+
+  ///facebook login
+
+  const responseFacebook = async (response) => {
+    const name = response?.name;
+    const token = response?.accessToken;
+    try {
+      dispatch({ type: "FAUTH", data: { name, token } });
+      console.log(token);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(response);
+  };
+
 
   return (
     <LoginD>
@@ -78,20 +113,52 @@ function Login() {
               <Input type="password" />
             </Form.Item>
             <button className="contact-more mt-2">Login</button>
-            <hr />
-            <p>Dont have an account? </p>
-            <Link to="/register">
-              <button className="login-more mt-2">SignUp</button>
-            </Link>
           </Form>
+          <p>Or Sign in using</p>
+          <FacebookLogin
+            appId={process.env.REACT_APP_FACRBOOK_ID}
+            // autoLoad
+            callback={responseFacebook}
+            render={(renderProps) => (
+              <button
+                className="login-more mt-2 mr-2"
+                onClick={renderProps.onClick}
+              >
+                <FaFacebookF />
+              </button>
+            )}
+          />
+          
+          <GoogleLogin
+            clientId={process.env.REACT_APP_GOOGLE_ID}
+            render={(renderProps) => (
+              <button
+                className="login-more mt-2 ml-2"
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+                variant="contained"
+              >
+                <BsGoogle />
+              </button>
+            )}
+            buttonText="Login"
+            onSuccess={googleSuccess}
+            onFailure={googleFailure}
+            cookiePolicy={"single_host_origin"}
+          />
+          <hr />
+          <p>Dont have an account? </p>
+          <Link to="/register">
+            <button className="login-more mt-2 mb-5">SignUp</button>
+          </Link>
         </Col>
+
         <Col lg={16} s={24} xs={24} m={24}>
           <img
-            className="w-100 rent-img32"
-            data-aos="slide-right"
             data-aos-duration="1500"
             src={loginImg}
             alt="add"
+            className="rent-img32"
           />
         </Col>
       </Row>

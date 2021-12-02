@@ -91,7 +91,7 @@ function BookingCar({ match }) {
             {/* <ul class="list-group list-group-flush"> */}
             <div className="row">
             <div class="col">
-              <h6 style={{color:"#f5f5f5"}}>
+              <h6 style={{color:"#f5f5f5",}}>
                 {" "}
                 <FcEngineering />
                 &nbsp; {car.engine}{" "}
@@ -148,7 +148,7 @@ function BookingCar({ match }) {
               token={onToken}
               currency="EUR"
               amount={totalAmount * 100} //it takes ammount in cents
-              stripeKey="pk_test_51JwUEwJfaoIGDApqWTIsMFqcieygsKsANOwJLQQrV5cktov7by0RM5steVlCZQeOfeuNIbnBWjyv4WPTW9zAj1os00DmGhKlek"
+              stripeKey={process.env.REACT_APP_STRIPE_KEY}
             >
               <button className="contact-more">Book Now</button>{" "}
             </StripeCheckout>

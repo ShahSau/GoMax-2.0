@@ -120,11 +120,11 @@ const Rental = () => {
         </RentwordD>
 
         {/* h4 and range picker er left postion fix koro for smaller screen */}
-        <h4 style={{ color: "#f5f5f5",position: "relative", top: "33%",left: "30%" }}> Search time slots </h4>
+        <h4 style={{ color: "#f5f5f5",position: "relative", top: "37%",left: "30%" }}> Search time slots </h4>
         <Row
           justify="center"
           className="d-flex align-items-center"
-          style={{ position: "relative", top: "30%", left: "30%" }}
+          style={{ position: "relative", top: "35%" }}
         >
           
           <Col lg={22} sm={24} className="text-center mt-5">
@@ -143,7 +143,7 @@ const Rental = () => {
         <Row
           justify="center"
           gutter={16}
-          style={{ position: "relative", top: "30%" }}
+          style={{ position: "relative", top: "40%" }}
         >
           {totalCars.map((car) => {
             return (
@@ -154,7 +154,7 @@ const Rental = () => {
                 xs={22}
                 className=" d-flex-iinline align-items-center justify-content-between mb-5"
               >
-                <div class="card" style={{ backgroundColor: "#000" }}>
+                <div class="card" style={{ backgroundColor: "#000",border: "2px solid #231F20" }}>
                   <img className="card-img-top" src={car.image} alt="Cardcap" />
                   <div class="card-body">
                     <h5 className="card-title" style={{ color: "#f5f5f5" }}>

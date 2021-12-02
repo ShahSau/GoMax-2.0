@@ -8,7 +8,7 @@ import serviceimg from "../asset/images/service.jpeg";
 import Segment from "../components/Segment";
 import { Link } from "react-router-dom";
 import { Button, Row, Col, DatePicker, Card } from "antd";
-import moment from "moment";
+
 import Spinner from "../components/Spinner";
 const Service = () => {
   const ServiceD = styled.div`
@@ -89,7 +89,16 @@ const Service = () => {
             <br />
           </ChecklistD>
         </ServicewordD>
-        <Segment bigger="Our Services" style={{top:"50%", position:"absolute"}} />
+        <Row
+          justify="center"
+          
+          style={{ position: "absolute", top: "70%",width:"100vw" }}
+        >
+          <Col lg={22} sm={24} className="text-center mt-5">
+          <Segment bigger="Our Services" style={{top:"50%", position:"relative"}} />
+          </Col>
+       
+        </Row>
         <Row
           justify="center"
           gutter={5}
@@ -106,16 +115,16 @@ const Service = () => {
                 xs={22}
                 className=" d-flex-iinline align-items-center justify-content-between mb-5"
               >
-                <div class="card" style={{ backgroundColor: "#000" }}>
+                 <div class="card" style={{ backgroundColor: "#000" }}>
                   <img
                     className="card-img-top"
                     src={service.image}
                     alt="Cardcap"
                   />
                   <div class="card-body">
-                    <h5 className="card-title" style={{ color: "#f5f5f5" }}>
+                    <h6 className="card-title" style={{ color: "#f5f5f5" }}>
                       {service.name}{" "}
-                    </h5>
+                    </h6>
                     <h6 className="card-text" style={{ color: "#f5f5f5" }}>
                       ${service.price}/hour
                     </h6>
@@ -123,7 +132,9 @@ const Service = () => {
                       <Link to={`/service/${service.id}`}>see details</Link>{" "}
                     </button>{" "}
                   </div>
-                </div>
+                </div> 
+
+               
               </Col>
             );
           })}

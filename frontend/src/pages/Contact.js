@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Form, Input, Carousel } from "antd";
-import Slider from "react-slick";
+
 import Spinner from "../components/Spinner";
 import { useSelector } from "react-redux";
 import contactImg from "../asset/images/car-contact.jpeg";

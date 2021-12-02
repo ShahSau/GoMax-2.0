@@ -70,7 +70,7 @@ const Sale = () => {
         </SalewordD>
         <Segment bigger="Cars for Sale" />
       </SaleD>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

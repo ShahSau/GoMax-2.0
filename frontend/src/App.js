@@ -13,7 +13,6 @@ import BookingCar from "./pages/BookingCar";
 import RequireAuth from "./components/RequireAuth";
 import UserBookings from "./pages/UserBookings";
 import SingleService from "./pages/SingleService";
-
 function App() {
   return (
     <div className="App">
