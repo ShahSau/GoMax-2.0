@@ -10,6 +10,7 @@ const usersRouter = require("./controllers/users");
 const loginRouter = require("./controllers/login");
 const bookingRouter = require("./controllers/bookings")
 const serviceRouter = require("./controllers/service")
+const buyRouter = require("./controllers/buy")
 const config = require("./utils/config");
 mongoose
   .connect(config.MONGODB_URI, {
@@ -21,7 +22,7 @@ mongoose
   .then(() => {
     logger.info("connceted to mongodb");
   })
-  .catch(() => {
+  .catch((error) => {
     logger.error("error connecting to mongoDB", error.message);
   });
 app.use(cors());
@@ -31,6 +32,7 @@ app.use("/api/users", usersRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/bookings", bookingRouter)
 app.use("/api/service", serviceRouter)
+app.use("/api/buy", buyRouter)
 
 app.get("/", (request, response) => {
   response.send("<h1>Hello World!</h1>");

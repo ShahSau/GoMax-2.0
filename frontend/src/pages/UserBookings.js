@@ -29,7 +29,7 @@ function UserBookings() {
             .map((booking) => {
               return (
                 <Row gutter={16} className="d-flex-inline align-items-center">
-                  <Col lg={16} sm={16} xs={24} className="p-3">
+                  <Col lg={16} sm={16} xs={24} className="text-center p-3">
                     <div class="card" style={{ backgroundColor: "#231F20" }}>
                       <img
                         src={booking.car.image}

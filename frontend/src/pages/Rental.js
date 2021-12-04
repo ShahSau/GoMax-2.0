@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import Segment from "../components/Segment";
 import { Link } from "react-router-dom";
-import { Button, Row, Col, DatePicker, Card } from "antd";
+import { Row, Col, DatePicker, Card } from "antd";
 import moment from "moment";
 import Spinner from "../components/Spinner";
 const Rental = () => {
@@ -51,14 +51,15 @@ const Rental = () => {
 
   const { cars } = useSelector((state) => state.carsReducer);
   const { loading } = useSelector((state) => state.alertsReducer);
+  console.log(`befor dispatch: ${cars}`)
   const dispatch = useDispatch();
   const [totalCars, setTotalcars] = useState([]);
   const { RangePicker } = DatePicker;
-  const { Meta } = Card;
+  // const { Meta } = Card;
   useEffect(() => {
     dispatch(getAllCars());
   }, []);
-
+  console.log(`befor dispatch: ${cars}`)
   useEffect(() => {
     setTotalcars(cars);
     console.log(totalCars);
@@ -127,7 +128,7 @@ const Rental = () => {
           style={{ position: "relative", top: "35%" }}
         >
           
-          <Col lg={22} sm={24} className="text-center mt-5">
+          <Col lg={22} sm={22} md={24} className="text-center mt-5">
             <RangePicker
               showTime={{ format: "HH:mm" }}
               format="MMM DD yyyy HH:mm"

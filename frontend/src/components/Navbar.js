@@ -95,7 +95,7 @@ const Navbar = () => {
             )}
             {localStorage.getItem("gomax-user") && (
               <li>
-                <NavLink to="/sale">Buy</NavLink>
+                <NavLink to="/buy">Buy</NavLink>
               </li>
             )}
             {localStorage.getItem("gomax-user") && (

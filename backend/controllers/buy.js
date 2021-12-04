@@ -1,17 +1,17 @@
-const carsRouter = require("express").Router();
+const buyRouter = require("express").Router();
 
-const Car = require("../models/car");
+const Buy = require("../models/buy");
 
 //getting all the cars
-carsRouter.get("/", (request, response) => {
-  Car.find({}).then((cars) => {
+buyRouter.get("/", (request, response) => {
+  Buy.find({}).then((cars) => {
     response.json(cars);
   });
 });
 
 //getting a specific car
-carsRouter.get("/:id", (request, response, next) => {
-  Car.findById(request.params.id)
+buyRouter.get("/:id", (request, response, next) => {
+  Buy.findById(request.params.id)
     .then((car) => {
       if (car) {
         response.json(car);
@@ -25,8 +25,8 @@ carsRouter.get("/:id", (request, response, next) => {
 });
 
 //deleting a car
-carsRouter.delete("/:id", (request, response, next) => {
-  Car.findByIdAndRemove(request.params.id)
+buyRouter.delete("/:id", (request, response, next) => {
+  Buy.findByIdAndRemove(request.params.id)
     .then((result) => {
       console.log(result);
       response.status(204).end();
@@ -37,7 +37,7 @@ carsRouter.delete("/:id", (request, response, next) => {
 });
 
 //adding a car
-carsRouter.post("/", (request, response, next) => {
+buyRouter.post("/", (request, response, next) => {
   const body = request.body;
   console.log(body);
   if (body.name === undefined) {
@@ -45,20 +45,26 @@ carsRouter.post("/", (request, response, next) => {
       error: "content missing",
     });
   }
-  const car = new Car({
+  const buy = new Buy({
     name: body.name,
     price: body.price,
-    image: body.image,
+    description: body.description,
     engine: body.engine,
     acceleration: body.acceleration,
     maxSpeed: body.maxSpeed,
     maxTorque: body.maxTorque,
     turbo: body.turbo,
     consumption: body.consumption,
-    capacity:body.capacity,
-    fuel:body.fuel
+    capacity: body.capacity,
+    image: {
+      image1: body.image.image1,
+      image2: body.image.image2,
+      image3: body.image.image3,
+      image4: body.image.image4,
+    },
+    fuel: body.fuel,
   });
-  car
+  buy
     .save()
     .then((savedandformated) => {
       response.json(savedandformated);
@@ -69,20 +75,28 @@ carsRouter.post("/", (request, response, next) => {
 });
 
 //data updating of a car
-carsRouter.put(":id", (request, response, next) => {
+buyRouter.put(":id", (request, response, next) => {
   const body = request.body;
-  const car = {
+  const buy = {
     name: body.name,
     price: body.price,
-    image: body.image,
+    description: body.description,
     engine: body.engine,
     acceleration: body.acceleration,
     maxSpeed: body.maxSpeed,
     maxTorque: body.maxTorque,
     turbo: body.turbo,
     consumption: body.consumption,
+    capacity: body.capacity,
+    image: {
+      image1: body.image.image1,
+      image2: body.image.image2,
+      image3: body.image.image3,
+      image4: body.image.image4,
+    },
+    fuel: body.fuel,
   };
-  Car.findByIdAndUpdate(request.params.id, car, {
+  Buy.findByIdAndUpdate(request.params.id, buy, {
     new: true,
     runValidators: true,
     context: "query",
@@ -94,4 +108,5 @@ carsRouter.put(":id", (request, response, next) => {
       next(error);
     });
 });
-module.exports = carsRouter;
+
+module.exports = buyRouter;

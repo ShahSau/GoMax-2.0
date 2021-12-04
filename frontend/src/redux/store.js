@@ -6,6 +6,7 @@ import { carsReducer } from "./reducers/carsReducer";
 import {bookingsReducer} from "./reducers/bookingsReducer"
 import {authReducer} from "./reducers/authReducer"
 import {serviceReducer} from "./reducers/serviceReducer"
+import {buyReducer} from "./reducers/buyReducer"
 const composeEnhancers = composeWithDevTools({});
 
 const rootReducer = combineReducers({
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   alertsReducer,
   authReducer,
   bookingsReducer,
-  serviceReducer
+  serviceReducer,
+  buyReducer,
 });
 const store = createStore(
   rootReducer,

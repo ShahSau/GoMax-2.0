@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Rental from "./pages/Rental";
-import Sale from "./pages/Sale";
+import Buy from "./pages/Buy";
 import Service from "./pages/Service";
 import Signup from "./pages/Signup";
 import Notfound from "./pages/Notfound";
@@ -25,7 +25,8 @@ function App() {
 
           <Route element={<RequireAuth />}>
             <Route path="/rent" element={<Rental />} />
-            <Route path="/sale" element={<Sale />} />
+            <Route path="/buy" element={<Buy />} />
+            {/* <Route path="/buy/:carid" element={< />} /> */}
             <Route path="/service" element={<Service />} />
             <Route path="/service/:id" element={<SingleService />} />
             <Route path="/contact" element={<Contact />} />
