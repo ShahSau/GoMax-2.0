@@ -110,8 +110,8 @@ const Service = () => {
             return (
               <Col
                 lg={5}
-                md={11}
-                sm={22}
+                md={7}
+                sm={11}
                 xs={22}
                 className=" d-flex-iinline align-items-center justify-content-between mb-5"
               >

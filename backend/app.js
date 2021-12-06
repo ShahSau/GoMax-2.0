@@ -8,10 +8,12 @@ const middleware = require("./utils/middleware");
 const carsRouter = require("./controllers/car");
 const usersRouter = require("./controllers/users");
 const loginRouter = require("./controllers/login");
-const bookingRouter = require("./controllers/bookings")
-const serviceRouter = require("./controllers/service")
-const buyRouter = require("./controllers/buy")
+const bookingRouter = require("./controllers/bookings");
+const serviceRouter = require("./controllers/service");
+const buyRouter = require("./controllers/buy");
 const config = require("./utils/config");
+const favRouter = require("./controllers/fav");
+
 mongoose
   .connect(config.MONGODB_URI, {
     useNewUrlParser: true,
@@ -30,10 +32,10 @@ app.use(express.json());
 app.use("/api/getallcars", carsRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/login", loginRouter);
-app.use("/api/bookings", bookingRouter)
-app.use("/api/service", serviceRouter)
-app.use("/api/buy", buyRouter)
-
+app.use("/api/bookings", bookingRouter);
+app.use("/api/service", serviceRouter);
+app.use("/api/buy", buyRouter);
+app.use("/api/favourite", favRouter);
 app.get("/", (request, response) => {
   response.send("<h1>Hello World!</h1>");
 });

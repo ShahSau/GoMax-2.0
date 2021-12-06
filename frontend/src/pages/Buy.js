@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAll } from "../redux/actions/buyActions";
 import rentimg from "../asset/images/car-sale.jpeg";
-import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import Segment from "../components/Segment";
@@ -10,6 +9,9 @@ import Spinner from "../components/Spinner";
 import { Row, Col } from "antd";
 import { Link } from "react-router-dom";
 import { AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
+import { addToCart } from "../redux/actions/cartAction";
+
 const Buy = () => {
   const SaleD = styled.div`
     height: 100vh;
@@ -44,7 +46,7 @@ const Buy = () => {
   `;
   const { buyCar } = useSelector((state) => state.buyReducer);
   const { loading } = useSelector((state) => state.alertsReducer);
- console.log(`befor dispatch: ${buyCar}`)
+  console.log(`befor dispatch: ${buyCar}`);
 
   const dispatch = useDispatch();
   const [allCars, setAllcars] = useState([]);
@@ -52,12 +54,34 @@ const Buy = () => {
   useEffect(() => {
     dispatch(getAll());
   }, []);
-  console.log(`after dispatch: ${buyCar}`)
+  console.log(`after dispatch: ${buyCar}`);
   useEffect(() => {
     setAllcars(buyCar);
+    {
+      console.log(allCars);
+    }
   }, [buyCar]);
 
-  ////////////////allCars
+  const pressedHeart = (c) => {
+    const reqobj = {
+      user: JSON.parse(localStorage.getItem("gomax-user")).id,
+      car: c.id,
+      name: c.name,
+      price: c.price,
+      description: c.description,
+      engine: c.engine,
+      acceleration: c.acceleration,
+      maxSpeed: c.maxSpeed,
+      turbo: c.turbo,
+      consumption: c.consumption,
+      capacity: c.capacity,
+      image: c.image,
+      maxTorque: c.maxTorque,
+      fuel: c.fuel,
+    };
+    console.log(reqobj);
+    dispatch(addToCart(reqobj));
+  };
   console.log({ allCars });
   return (
     <>
@@ -89,47 +113,82 @@ const Buy = () => {
             <br />
           </ChecklistD>
         </SalewordD>
-        <Segment bigger="Cars for Sale"  />
+        <Segment bigger="Cars for Sale" />
 
         <Row
-          justify="center"
-          gutter={16}
-          style={{ position: "relative", top: "40%" }}
+          justify="space-around"
+          gutter={24}
+          style={{ position: "relative", top: "40%", width: "100%" }}
         >
           {allCars.map((car) => {
             return (
               <Col
-                lg={11}
-                md={11}
-                sm={22}
+                lg={5}
+                md={7}
+                sm={11}
                 xs={22}
                 className="d-flex-inline align-items-center justify-content-between mb-5"
               >
-                <div class="card" style={{  }}>
+                <div class="card" style={{ backgroundColor: "#f5f5f5" }}>
                   <img
                     className="card-img-top"
                     src={car.image.image1}
                     alt="Cardcap"
                   />
                   <div class="card-body">
-                    <a onClick={()=>console.log("hi")}>
-                      <AiFillHeart
-                        style={{
-                         color:"red",fontSize:"40px",borderRadius:"100%",marginTop: "-35px",   float: "right",
-                         marginLeft: "90px"
-                        }}
-                      />{" "}
-                    </a>
-                    <h5 className="card-title" style={{ color: "#000",float: "left", marginTop: "-10px",marginLeft: "-10px"}}>
+                    {car.loved === false && (
+                      <button onClick={() => pressedHeart(car)}>
+                        <AiOutlineHeart
+                          style={{
+                            color: "red",
+                            fontSize: "40px",
+                            borderRadius: "100%",
+                            marginTop: "-35px",
+                            float: "right",
+                            marginLeft: "90px",
+                          }}
+                        />{" "}
+                        click
+                      </button>
+                    )}
+                    {car.loved === true && (
+                      <a onClick={() => console.log("pressed")}>
+                        <AiFillHeart
+                          style={{
+                            color: "red",
+                            fontSize: "40px",
+                            borderRadius: "100%",
+                            marginTop: "-35px",
+                            float: "right",
+                            marginLeft: "90px",
+                          }}
+                        />{" "}
+                      </a>
+                    )}
+                    <h5
+                      className="card-title"
+                      style={{
+                        color: "#000",
+                        float: "left",
+                        marginTop: "-10px",
+                        marginLeft: "-10px",
+                      }}
+                    >
                       {car.name}{" "}
                     </h5>
-                    <p className="card-text" style={{ color: "#000",float: "left",marginLeft: "-15px" }}>
+                    <p
+                      className="card-text"
+                      style={{
+                        color: "#000",
+                        float: "left",
+                        marginLeft: "-15px",
+                      }}
+                    >
                       {car.description}
                     </p>
                     <button className="contact-buy">
                       <Link to={`/buy/${car.id}`}>Purchase</Link>{" "}
                     </button>{" "}
-                    
                   </div>
                 </div>
               </Col>

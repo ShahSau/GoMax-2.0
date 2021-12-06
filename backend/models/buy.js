@@ -52,6 +52,10 @@ const buySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  loved:{
+    type:Boolean,
+    default:false,
+  }
   // user: { type: mongoose.Schema.Types.ObjectID, ref: "User" },
 });
 buySchema.set("toJSON", {
